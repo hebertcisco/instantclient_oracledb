@@ -1,24 +1,31 @@
-mkdir -p /opt/oracle
-cd /opt/oracle
-wget https://download.oracle.com/otn_software/linux/instantclient/instantclient-basic-linuxx64.zip
-unzip instantclient-basic-linuxx64.zip
+#!/bin/bash
+## By Hebert F. Barros 2020
+## Removing any apt ## crashes
+sudo rm /var/lib/dpkg/lock-frontend
+sudo rm /var/cache/apt/archives/lock
 
-sudo sh -c "echo /opt/oracle/instantclient_19_6 > /etc/ld.so.conf.d/oracle-instantclient.conf"
-sudo ldconfig
+sudo apt-get update
 
-cd /opt/oracle/instantclient_12_2
-ln -s libclntsh.so.12.1 libclntsh.so
-ln -s libocci.so.12.1 libocci.so
+# Install some required libraries
+sudo apt-get install php5-dev build-essential php-pear libaio1
 
-sudo sh -c "echo /opt/oracle/instantclient_19_3 > \
-      /etc/ld.so.conf.d/oracle-instantclient.conf"
-  sudo ldconfig
-  export LD_LIBRARY_PATH=/opt/oracle/instantclient_19_3:$LD_LIBRARY_PATH
+# Download the alien.
+echo 'Downloading the alien.'
+sudo apt-get install alien
 
-mkdir -p /opt/oracle/instantclient_12_2/network/admin
+# Download the oracle-instantclient-basic.
+echo 'Downloading the oracle-instantclient-basic.'
+wget https://download.oracle.com/otn_software/linux/instantclient/oracle-instantclient-basic-linuxx64.rpm
 
-export PATH=/opt/oracle/instantclient_19_3:$PATH
+# Converting package .rpm to .deb.
+echo 'Converting package .rpm to .deb.'
 
-sudo sh -c "echo /usr/lib/oracle/18.3/client64/lib > \
-      /etc/ld.so.conf.d/oracle-instantclient.conf"
-  sudo ldconfig
+sudo alien oracle-instantclient-basic-linuxx64.rpm && sleep 120
+
+# Installing oracle-instantclient-basic.deb.
+echo 'Installing oracle-instantclient-basic_21.1.0.0.0-2_amd64.deb.'
+sudo dpkg -i oracle-instantclient-basic_21.1.0.0.0-2_amd64.deb
+
+# Removing packages.
+echo 'Removing packages.'
+rm -rf oracle-instantclient-basic-linuxx64.rpm oracle-instantclient-basic_21.1.0.0.0-2_amd64.deb
