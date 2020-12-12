@@ -9,7 +9,7 @@
   </a>
 </p>
 
-> Install InstantClient installer to OracleDB in debian based systems
+> Install InstantClient to OracleDB in debian based systems
 
 ## Install via curl
 
