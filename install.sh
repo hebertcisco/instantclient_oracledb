@@ -7,7 +7,7 @@ sudo rm /var/cache/apt/archives/lock
 sudo apt-get update
 
 # Install some required libraries
-sudo apt-get install php5-dev build-essential php-pear libaio1 alien
+sudo apt-get install php build-essential php-pear libaio1 alien
 
 # Download the oracle-instantclient-basic.
 echo 'Downloading the oracle-instantclient-basic.'
