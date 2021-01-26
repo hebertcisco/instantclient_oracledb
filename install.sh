@@ -16,7 +16,7 @@ wget https://download.oracle.com/otn_software/linux/instantclient/oracle-instant
 # Converting package .rpm to .deb.
 echo 'Converting package .rpm to .deb.'
 
-sudo alien oracle-instantclient-basic-linuxx64.rpm && sleep 120
+sudo alien oracle-instantclient-basic-linuxx64.rpm && sleep 170
 
 # Installing oracle-instantclient-basic.deb.
 echo 'Installing oracle-instantclient-basic_21.1.0.0.0-2_amd64.deb.'
