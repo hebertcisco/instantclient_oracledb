@@ -9,7 +9,7 @@
   </a>
 </p>
 
-Gostou o projeto? Por favor considere <a href="https://github.com/hebertcisco/hebertcisco/blob/main/.github/patreon.md">ser um apoiador</a> e receba brindes exclusivos!
+<p align="center">Did you like the project? Please, considerate <a href="https://www.buymeacoffee.com/hebertcisco">being a supporter</a>!</p>
 
  
 > Install InstantClient to OracleDB in debian based systems
