@@ -1,61 +1,83 @@
 #!/bin/sh
-## By Hebert F. Barros 2021
+# By Hebert F. Barros 2023
 
 main() {
+    # Check if apt package manager is installed
+    if ! [ -x "$(command -v apt)" ]; then
+        echo 'Your system needs the aptitude package manager to run this script...'
+        exit 1
+    fi
 
-    noAPT() {
-        echo 'Your sistem need the apitude to run this is script...'
-        exit
+    # check if the package is already installed
+    if dpkg -s oracle-instantclient-basic > /dev/null 2>&1; then
+        echo "oracle-instantclient-basic is already installed"
+        exit 0
+    fi
+
+    # check for dependencies
+    check_dependencies(){
+        echo "Checking for dependencies..."
+        missing_dependencies=""
+        for package in php build-essential php-pear libaio1 alien; do
+            if ! dpkg -s $package > /dev/null 2>&1; then
+                missing_dependencies="$missing_dependencies $package"
+            fi
+        done
+        if [ -n "$missing_dependencies" ]; then
+            echo "Installing missing dependencies:$missing_dependencies"
+            sudo apt-get install -y $missing_dependencies
+        fi
     }
+    check_dependencies
 
+    # Removing any apt crashes
     removingAptCrashes() {
         echo 'Removing any apt crashes...'
         sudo rm /var/lib/dpkg/lock-frontend
         sudo rm /var/cache/apt/archives/lock
         sudo apt-get update
     }
+    removingAptCrashes
 
-    installRequiredLibraries() {
-        # Install some required libraries
-        echo 'Installing some required libraries...'
-        sudo apt-get install php build-essential php-pear libaio1 alien
-    }
-
+    # Download the oracle-instantclient-basic.
     downloadTheOracleInstantClientBasic() {
-        # Download the oracle-instantclient-basic.
-        echo 'Downloading the oracle-instantclient-basic.'
-        wget https://download.oracle.com/otn_software/linux/instantclient/oracle-instantclient-basic-linuxx64.rpm
-
+        echo 'Downloading the oracle-instantclient-basic...'
+        wget https://download.oracle.com/otn_software/linux/instantclient/oracle-instantclient-basic-linuxx64.rpm -O oracle-instantclient-basic.rpm
+        if [ $? -ne 0 ]; then
+            echo "Error: Failed to download oracle-instantclient-basic package"
+            exit 1
+        fi
     }
+    downloadTheOracleInstantClientBasic
+
+    # Converting package .rpm to .deb.
     convertingPackage() {
-        # Converting package .rpm to .deb.
         echo 'Converting package .rpm to .deb.'
-
-        sudo alien oracle-instantclient-basic-linuxx64.rpm && sleep 170
+        sudo alien oracle-instantclient-basic.rpm
+        if [ $? -ne 0 ]; then
+            echo "Error: Failed to convert oracle-instantclient-basic package"
+            exit 1
+        fi
     }
+    convertingPackage
+
+    # Installing oracle-instantclient-basic.deb.
     installingTheOracleInstantClientBasic() {
-        # Installing oracle-instantclient-basic.deb.
-        echo 'Installing oracle-instantclient-basic_21.1.0.0.0-2_amd64.deb.'
-        sudo dpkg -i oracle-instantclient-basic_21.1.0.0.0-2_amd64.deb
-
+        echo 'Installing oracle-instantclient-basic.deb.'
+        sudo dpkg -i oracle-instantclient-basic*.deb
+        if [ $? -ne 0 ]; then
+            echo "Error: Failed to install oracle-instantclient-basic package"
+            exit 1
+        fi
     }
+    installingTheOracleInstantClientBasic
+
+    # Removing packages
     removingPackages() {
-        # Removing packages.
         echo 'Removing packages.'
-        rm -rf oracle-instantclient-basic-linuxx64.rpm oracle-instantclient-basic_21.1.0.0.0-2_amd64.deb
-
+        rm -rf oracle-instantclient-basic*.{rpm,deb}
     }
-    if ! [ -x "$(command -v apt)" ]; then
-        noAPT "$1" >&2
-        exit 1
-    else
-        removingAptCrashes "$1"
-        installRequiredLibraries "$1"
-        downloadTheOracleInstantClientBasic "$1"
-        convertingPackage "$1"
-        installingTheOracleInstantClientBasic "$1"
-        removingPackages "$1"
-    fi
+    removingPackages
 }
 
 main "$1"
