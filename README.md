@@ -1,33 +1,32 @@
-<h1 align="center">Welcome to InstantClient to OracleDB👋</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
-  <a href="LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-  </a>
-  <a href="https://twitter.com/hebertcisco" target="_blank">
-    <img alt="Twitter: hebertcisco" src="https://img.shields.io/twitter/follow/hebertcisco.svg?style=social" />
-  </a>
-</p>
+# Oracle InstantClient Installation Script
 
-<p align="center">Did you like the project? Please, considerate <a href="https://www.buymeacoffee.com/hebertcisco">being a supporter</a>!</p>
+> This script automates the installation of Oracle InstantClient on Debian-based systems.
 
- 
-> Install InstantClient to OracleDB in debian based systems
+### Requirements
 
-## Install via curl
+A Debian-based system (e.g. Ubuntu, Debian)
+apt package manager installed
+An internet connection
+
+### Usage
+To use the script, open a terminal and run the following command:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/hebertcisco/instantclient_oracledb/master/install.sh | sh
 ```
 
-## Author
+The script will check for dependencies, download and install the Oracle InstantClient package, and remove any unnecessary files.
 
-👤 **Hebert F Barros**
+Note: The script is designed to work with Oracle InstantClient version 21.1.0.0.0 and x64 architecture. If you want to install a different version or architecture, you should edit the script accordingly.
 
-- Website: https://tecnobert.com.br/
-- Twitter: [@hebertcisco](https://twitter.com/hebertcisco)
-- Github: [@hebertcisco](https://github.com/hebertcisco)
-- LinkedIn: [@hebert-f-barros](https://linkedin.com/in/hebert-f-barros)
+### Troubleshooting
+
+If you encounter any errors during the installation process, check the error messages displayed by the script and take appropriate action.
+If you are unable to connect to the Oracle server after running the script, check that the Oracle server is running and that you have the correct credentials.
+
+### Support
+
+If you have any issues or questions about using this script, please open an issue on the GitHub repository or contact the author directly.
 
 ## 🤝 Contributing
 
@@ -43,5 +42,5 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2020 [Hebert F Barros](https://github.com/hebertcisco).<br />
+Copyright © 2023 [Hebert F Barros](https://github.com/hebertcisco).<br />
 This project is [MIT](LICENSE) licensed.
