@@ -11,8 +11,20 @@ An internet connection
 ### Usage
 To use the script, open a terminal and run the following command:
 
+#### Bash & Curl
+
 ```sh
 curl -fsSL https://raw.githubusercontent.com/hebertcisco/instantclient_oracledb/master/install.sh | sh
+```
+
+#### Bash & Curl
+
+```sh
+npm i -g instant-client-oracledb
+
+# Usage:
+
+instant-client-oracledb
 ```
 
 The script will check for dependencies, download and install the Oracle InstantClient package, and remove any unnecessary files.
