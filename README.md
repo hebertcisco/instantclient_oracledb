@@ -20,11 +20,7 @@ curl -fsSL https://raw.githubusercontent.com/hebertcisco/instantclient_oracledb/
 #### With NPM
 
 ```sh
-npm i -g instant-client-oracledb
-
-# Usage:
-
-instant-client-oracledb
+npx instant-client-oracledb
 ```
 
 The script will check for dependencies, download and install the Oracle InstantClient package, and remove any unnecessary files.
