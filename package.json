@@ -1,0 +1,48 @@
+{
+  "name": "instant-client-oracledb",
+  "version": "0.0.1",
+  "description": "Install InstantClient to OracleDB in debian based systems",
+  "scripts": {
+    "patch-release": "npm version patch && npm publish && git push --follow-tags"
+  },
+  "bin": {
+    "instant-client-oracledb": "install.sh"
+  },
+  "engines": {
+    "node": ">=14.20.1",
+    "npm": ">=6.14.17"
+  },
+  "os": [
+    "linux",
+    "!darwin",
+    "!win32"
+  ],
+  "cpu": [
+    "x64",
+    "!arm",
+    "!mips"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hebertcisco/instantclient_oracledb.git"
+  },
+  "keywords": [
+    "oracledb",
+    "instant-client"
+  ],
+  "author": "Hebert Cisco",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hebertcisco/instantclient_oracledb/issues"
+  },
+  "homepage": "https://github.com/hebertcisco/instantclient_oracledbb#readme",
+  "devDependencies": {
+    "@types/node": "18.11.18"
+  },
+  "files": [
+    "bin/**/*"
+  ],
+  "bundledDependencies": [
+    "@types/node"
+  ]
+}
