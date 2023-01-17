@@ -17,7 +17,7 @@ To use the script, open a terminal and run the following command:
 curl -fsSL https://raw.githubusercontent.com/hebertcisco/instantclient_oracledb/master/install.sh | sh
 ```
 
-#### Bash & Curl
+#### With NPM
 
 ```sh
 npm i -g instant-client-oracledb
